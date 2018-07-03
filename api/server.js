@@ -1,36 +1,3 @@
-/*
-var express = require('express'),
-	consign = require('consign'),
-    bodyParser = require('body-parser'),
-    multiparty = require('connect-multiparty'),
-    mongodb = require('mongodb'),
-    objectId = require('mongodb').ObjectId,
-    fs = require('fs');
-
-var app = express();
-
-app.use(bodyParser.urlencoded({ extended:true}));
-app.use(bodyParser.json());
-app.use(multiparty());
-
-consign()
-	.include('app/routes')
-	.then('config/dbConnection.js')
-	.then('app/models')
-	.then('app/controllers')
-	.into(app);
-
-app.use(function(req, res, next){
-
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-    res.setHeader("Access-Control-Allow-Headers", "content-type");
-    res.setHeader("Access-Control-Allow-Credentials", true);
-
-    next();
-});
-*/
-
 var app = require('./config/server');
 
 var port = 8080;
@@ -40,33 +7,42 @@ app.listen(port);
 console.log('Servidor HTTP esta escutando na porta ' + port);
 
 
-/* importar as configurações do servidor */
-/*
-var app = require('./config/server');
-
-var port = 8080;
-
-app.listen(port, function(){
-	console.log('Servidor HTTP esta escutando na porta ' + port);
-})
-*/
-
-
 app.get('/',function(req, res){
 
     res.send({msg: 'Olá'});
 });
 
-var mongodb = require('mongodb');
+var mongo = require('mongodb');
 
-var db = new mongodb.Db(
+var db = new mongo.Db(
     'ibcdb',
-    new mongodb.Server('localhost', 27017, {}),
+    new mongo.Server(
+        'localhost', // string contendo o endereço do servidor
+        27017, // porta de conexão
+        {}
+    ),
     {}
 );
 
 app.get('/asset', function(req, res){
+    
+    db.open( function(err, mongoclient){
+        mongoclient.collection('asset', function(err, collection){
+            collection.find().toArray(function(err, results){
+                if(err){
+                    res.json(err);
+                } else {
+                    res.json(results);
+                }
+                mongoclient.close();
+            });
+        });
+    });
 
+});
+
+app.get('/tecnology', function(req, res){
+    
     db.open( function(err, mongoclient){
         mongoclient.collection('tecnology', function(err, collection){
             collection.find().toArray(function(err, results){
