@@ -1,0 +1,82 @@
+db.tecnology.save(
+	{"name": "Ethereum",
+	"icon": "ethereum.png",
+	"website": "www. Ethereum.com",
+	"sourcecode": "www.github.com/ethereum",
+	"status": "active",   
+	"assets": "902", 
+	"description": {
+		"BR": "Plataforma de aplicações",
+		"US": "Aplication Plataform"
+		},
+	"creators": [
+		{"name": "Satoshi","position": "Founder"},
+		{"name": "Nakamoto","position": "Founder"}
+		]
+	});
+
+db.tecnology.save(
+	{"name": "Blockchain",
+	"icon": "blockchain.png",
+	"website": "www.blockchain.com",
+	"sourcecode": "www.github.com/blockchain",
+	"status": "active",   
+	"assets": "902", 
+	"description": {
+		"BR": "Plataforma de aplicações",
+		"US": "Aplication Plataform"
+		},
+	"creators": [
+		{"name": "Satoshi","position": "Founder"},
+		{"name": "Nakamoto","position": "Founder"}
+		]
+	});
+
+			
+db.tecnology.remove({ name: {$eq:"Ethereum"}});
+
+
+db.asset.save(
+{"symbol": "BTC",
+"name": "Bitcoin",
+"icon": "bitcoin.png",
+"type": "Coin",
+"plataform": "Blockchain",
+"rank": "5",
+"website": "www.bitcoin.com",
+"sourcecode": "www.github.com/ethereum",
+"status": "active",
+"description":
+	{"BR": "Plataforma de aplicações",
+	"US": "Aplication Plataform"},
+"marketcap": "123528732,00",
+"volumelast24h": "1.234.343,00",
+"circulating": "1000000",
+"price": "1.234,00"}
+);
+
+db.asset.save(
+{"symbol": "ETH",
+"name": "Ethereum",
+"icon": "ethereum.png",
+"type": "Coin",
+"plataform": "Ethereum",
+"rank": "5",
+"website": "www.ethereum.com",
+"sourcecode": "www.github.com/ethereum",
+"status": "active",
+"description":
+	{"BR": "Plataforma de aplicações",
+	"US": "Aplication Plataform"},
+"marketcap": "123528732,00",
+"volumelast24h": "1.234.343,00",
+"circulating": "1000000",
+"price": "1.234,00"}
+);
+
+
+
+"markets":
+	Name: Kraken
+	Name: Bitfinex
+
